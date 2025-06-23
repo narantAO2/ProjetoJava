@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+
+public class Lanchonete {
+    private String nome;
+    private String endereco;
+    private ArrayList<Funcionario> funcionarios;
+    private ArrayList<Cliente> clientes;
+    private ArrayList<Produto> cardapio;
+
+    public Lanchonete(String nome, String endereco) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.funcionarios = new ArrayList<>();
+        this.clientes = new ArrayList<>();
+        this.cardapio = new ArrayList<>();
+    }
+
+    public void adicionarCliente(Cliente c) {
+        clientes.add(c); 
+        System.out.println("Cliente " + c.getNome() + " adicionado.\n");
+    }
+
+    public void adicionarFuncionario(Funcionario f) {
+        funcionarios.add(f);
+        System.out.println("Funcionário " + f.getNome() + " adicionado.\n");
+    }
+    
+    public void adicionarProdutoAoCardapio(Produto p) {
+        cardapio.add(p);
+        System.out.println("Produto " + p.nome + " adicionado ao cardápio.\n");
+    }
+
+    public void mostrarCardapio() {
+        System.out.println("\n--- Cardápio " + nome + " ---");
+        for (Produto p : cardapio) System.out.println(p.nome + " - R$ " + p.preco);
+        System.out.println("--- --- --- --- --- ---\n");
+    }
+}
