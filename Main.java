@@ -1,4 +1,4 @@
-/* Murilox: fazer com que funcionario e cardapio imprima direto do arquivo não do Array e chamar outras funções não usadas
+/* Murilox: fazer com que funcionario e cardapio imprima direto do arquivo não do Array
 Narantão: fazer com que implemente o resto das funções, personalização e adicionar cliente, funcionario e cardapio no arquivo*/
 import java.util.*;
 import java.io.*;
