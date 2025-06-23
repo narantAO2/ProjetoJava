@@ -35,4 +35,30 @@ public class Lanchonete {
         for (Produto p : cardapio) System.out.println(p.nome + " - R$ " + p.preco);
         System.out.println("--- --- --- --- --- ---\n");
     }
+
+    public ArrayList<Cliente> getClientes() {
+     return clientes;
+    }
+    public ArrayList getClientesSalvar() {
+        ArrayList clientesSalvar = new ArrayList();
+
+        for (Cliente c : clientes) {
+
+            String linhas = "Nome: " + c.getNome() + " CPF: " + c.getCpf()+ " Tel: " + c.getTelefone() + "\n";
+
+            clientesSalvar.add(linhas);
+
+
+        }
+        return clientesSalvar;
+
+    }
+
+    public ArrayList<Funcionario> getFuncionarios() {
+       return funcionarios;
+    }
+
+    public ArrayList<Produto> getCardapio() {
+       return cardapio;
+    }
 }
