@@ -1,10 +1,12 @@
-/* Murilox: fazer com que funcionario e cardapio imprima direto do arquivo não do Array
+/* Murilox: fazer com que funcionario e cardapio imprima direto do arquivo não do Array -- FEITO
 Narantão: fazer com que implemente o resto das funções, personalização e adicionar cliente, funcionario e cardapio no arquivo
 
 					Murilox o case 8 não estou consingo resolver pq eu estava tentando fazer com q o codigo pegasse direto do arquivo
 					para imprimir o cardapio e não ta dando e com isso o case 9 bugou tmb no mais é isso; Eu fiz com que o cardapio e
 					os produtos salvem direto no arquivo e usei o gpt para dar uma estilizada massa; Mais um erro é que quando vc escreve
 					para salver no arquivo ele salva duas vezes a mesma coisa; Eu ainda acho q da pra gente tirar os clientes de hoje.
+
+					    R: nao vi essse erro nõa, nao vou mexer no 8 pq não sei muito do codigo, resolvi a demanda que voce deixou
 				
 */
 import java.util.*;
@@ -90,7 +92,7 @@ public class Main {
                     break;
                     
                 case 6:
-                    lanche.lerArquivo("cardapio.txt");
+                    lanche.mostrarCardapio("cardapio.txt");
                     break;
                     
                 case 7:
@@ -99,7 +101,9 @@ public class Main {
 
 
                 case 8:
-                    
+
+
+                    break;
 
                 case 9:
                     pedidoAtual.mostrarPedido();

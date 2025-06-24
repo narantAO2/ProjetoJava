@@ -36,10 +36,16 @@ public class Lanchonete {
         System.out.println("Produto " + p.nome + " adicionado ao cardápio.\n");
     }
 
-    public void mostrarCardapio() {
-        System.out.println("\n--- Cardápio " + nome + " ---");
-        for (Produto p : cardapio) System.out.println(p.nome + " - R$ " + p.preco);
-        System.out.println("--- --- --- --- --- ---\n");
+    public void mostrarCardapio(String nomeArquivo) {
+        System.out.println("\n📄 Conteúdo de: " + "Cardapio\n");
+        try (BufferedReader leitor = new BufferedReader(new FileReader(nomeArquivo))) {
+            String linha;
+            while ((linha = leitor.readLine()) != null) {
+                System.out.println(linha);
+            }
+        } catch (IOException e) {
+            System.out.println("❌ Erro ao ler o arquivo " + nomeArquivo + ": " + e.getMessage());
+        }
     }
 
     public ArrayList<Cliente> getClientes() {
