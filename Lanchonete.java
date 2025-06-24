@@ -1,4 +1,10 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lanchonete {
     private String nome;
@@ -39,26 +45,57 @@ public class Lanchonete {
     public ArrayList<Cliente> getClientes() {
      return clientes;
     }
-    public ArrayList getClientesSalvar() {
-        ArrayList clientesSalvar = new ArrayList();
-
+    
+    public ArrayList<String> getClientesSalvar() {
+        ArrayList<String> clientesSalvar = new ArrayList<>();
         for (Cliente c : clientes) {
-
-            String linhas = "Nome: " + c.getNome() + " CPF: " + c.getCpf()+ " Tel: " + c.getTelefone() + "\n";
-
-            clientesSalvar.add(linhas);
-
-
+            String linha = "Nome: " + c.getNome() + " CPF: " + c.getCpf() + " Tel: " + c.getTelefone();
+            clientesSalvar.add(linha);
         }
         return clientesSalvar;
-
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
-       return funcionarios;
+    
+    public ArrayList<String> getFuncionariosSalvar() {
+        ArrayList<String> funcionariosSalvar = new ArrayList<>();
+        for (Funcionario f : funcionarios) {
+            String linha = "Nome: " + f.getNome() + " CPF: " + f.getCpf() + " Tel: " + f.getTelefone() + " Função: " + f.getClass().getSimpleName();
+            funcionariosSalvar.add(linha);
+        }
+        return funcionariosSalvar;
     }
 
-    public ArrayList<Produto> getCardapio() {
-       return cardapio;
+    
+    public ArrayList<String> getCardapioSalvar() {
+        ArrayList<String> cardapioSalvar = new ArrayList<>();
+        for (Produto p : cardapio) {
+            String linha = "Produto: " + p.getNome() + " | Preço: R$ " + p.getPreco() + " | Tipo: " + p.getClass().getSimpleName();
+            cardapioSalvar.add(linha);
+        }
+        return cardapioSalvar;
+    }
+    
+    public static void lerArquivo(String nomeArquivo) {
+        System.out.println("\n📄 Conteúdo de: " + nomeArquivo);
+        try (BufferedReader leitor = new BufferedReader(new FileReader(nomeArquivo))) {
+            String linha;
+            while ((linha = leitor.readLine()) != null) {
+                System.out.println(linha);
+            }
+        } catch (IOException e) {
+            System.out.println("❌ Erro ao ler o arquivo " + nomeArquivo + ": " + e.getMessage());
+        }
+    }
+    
+    public static void salvarListaEmArquivo(String nomeArquivo, List<?> lista) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true))) {
+            for (Object obj : lista) {
+                writer.write(obj.toString());
+                writer.newLine();
+            }
+            System.out.println("✅ Dados salvos em: " + nomeArquivo);
+        } catch (IOException e) {
+            System.out.println("❌ Erro ao salvar " + nomeArquivo + ": " + e.getMessage());
+        }
     }
 }

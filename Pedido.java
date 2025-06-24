@@ -35,4 +35,6 @@ public class Pedido {
         System.out.println("Total: R$ " + calcularValorTotal() + "\n");
         System.out.println("Status: " + status + "\n");
     }
+    
+    
 }

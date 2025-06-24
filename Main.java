@@ -1,5 +1,12 @@
 /* Murilox: fazer com que funcionario e cardapio imprima direto do arquivo não do Array
-Narantão: fazer com que implemente o resto das funções, personalização e adicionar cliente, funcionario e cardapio no arquivo*/
+Narantão: fazer com que implemente o resto das funções, personalização e adicionar cliente, funcionario e cardapio no arquivo
+
+					Murilox o case 8 não estou consingo resolver pq eu estava tentando fazer com q o codigo pegasse direto do arquivo
+					para imprimir o cardapio e não ta dando e com isso o case 9 bugou tmb no mais é isso; Eu fiz com que o cardapio e
+					os produtos salvem direto no arquivo e usei o gpt para dar uma estilizada massa; Mais um erro é que quando vc escreve
+					para salver no arquivo ele salva duas vezes a mesma coisa; Eu ainda acho q da pra gente tirar os clientes de hoje.
+				
+*/
 import java.util.*;
 import java.io.*;
 
@@ -7,20 +14,24 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         Lanchonete lanche = new Lanchonete("Lanchonete Bom Sabor", "Rua das Frutas, 123");
+        Pedido pedidoAtual = new Pedido();
 
         int opcao;
         do {
-            System.out.println("\n===== MENU =====");
-            System.out.println("1. Adicionar Cliente");
-            System.out.println("2. Adicionar Funcionário");
-            System.out.println("3. Adicionar Produto ao Cardápio");
-            System.out.println("4. Listar Clientes de Hoje");
-            System.out.println("5. Listar Funcionários");
-            System.out.println("6. Listar Cardápio");
-            System.out.println("7. Listar Clientes do Mês");
-
-            System.out.println("0. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.println("\n==============================");
+            System.out.println("      MENU - BOM SABOR 🍔     ");
+            System.out.println("==============================");
+            System.out.println("1️  Adicionar Cliente");
+            System.out.println("2️  Adicionar Funcionário");
+            System.out.println("3️  Adicionar Produto ao Cardápio");
+            System.out.println("4️  Listar Clientes de Hoje");
+            System.out.println("5️  Listar Funcionários");
+            System.out.println("6️  Listar Cardápio");
+            System.out.println("7️  Listar Clientes do Mês (arquivo)");
+            System.out.println("8️  Fazer Pedido");
+            System.out.println("9️  Ver Pedido Atual");
+            System.out.println("0️  Sair");
+            System.out.print("\nEscolha uma opção: ");
             opcao = sc.nextInt();
             sc.nextLine();
 
@@ -32,10 +43,12 @@ public class Main {
                     String cpfC = sc.nextLine();
                     System.out.print("Telefone: ");
                     String telC = sc.nextLine();
-                    lanche.adicionarCliente(new Cliente(nomeC, cpfC, telC));
-                    salvarListaEmArquivo("clientes.txt", lanche.getClientesSalvar());
-
+                    Cliente cliente = new Cliente(nomeC, cpfC, telC);
+                    lanche.adicionarCliente(cliente);
+                    pedidoAtual.adicionarCliente(cliente);
+                    lanche.salvarListaEmArquivo("clientes.txt", lanche.getClientesSalvar());
                     break;
+
                 case 2:
                     System.out.print("Nome: ");
                     String nomeF = sc.nextLine();
@@ -47,9 +60,9 @@ public class Main {
                     int funcao = sc.nextInt(); sc.nextLine();
                     Funcionario f = (funcao == 1) ? new Garcom(nomeF, cpfF, telF) : new Motoboy(nomeF, cpfF, telF);
                     lanche.adicionarFuncionario(f);
-                    salvarListaEmArquivo("funcionarios.txt", lanche.getFuncionarios());
-
+                    lanche.salvarListaEmArquivo("funcionarios.txt", lanche.getFuncionariosSalvar());
                     break;
+
                 case 3:
                     System.out.print("Nome do produto: ");
                     String nomeP = sc.nextLine();
@@ -63,50 +76,42 @@ public class Main {
                     else if (tipo == 2) p = new Lanche(nomeP, preco);
                     else p = new Sobremesa(nomeP, preco);
                     lanche.adicionarProdutoAoCardapio(p);
-                    salvarListaEmArquivo("cardapio.txt", lanche.getCardapio());
-
+                    lanche.salvarListaEmArquivo("cardapio.txt", lanche.getCardapioSalvar());
                     break;
+
                 case 4:
-                    System.out.println("\nClientes:");
-                    for (Cliente f2 : lanche.getClientes())
-                        System.out.println("Cliente: " + f2.getNome() + "cpf: " + f2.getCpf());
+                    System.out.println("\n👥 Clientes de hoje:");
+                    for (Cliente cli : lanche.getClientes())
+                        System.out.println("- " + cli.getNome() + " | CPF: " + cli.getCpf());
+                    break;
 
-                    break;
                 case 5:
-                    System.out.println("\nFuncionários:");
-                    for (Funcionario f2 : lanche.getFuncionarios())
-                        System.out.println("Funcionário: " + f2.getNome());
+                    lanche.lerArquivo("funcionarios.txt");
                     break;
+                    
                 case 6:
-                    System.out.println("\nCardápio:");
-                    for (Produto prod : lanche.getCardapio())
-                        System.out.println(prod.getNome() + " - R$ " + prod.getPreco());
+                    lanche.lerArquivo("cardapio.txt");
                     break;
+                    
                 case 7:
-                    BufferedReader reader = new BufferedReader(new FileReader("clientes.txt"));
-                    String linha;
-                    System.out.println("--------------Clientes do mês atual--------");
-                    while ((linha = reader.readLine()) != null) {
-                        System.out.println(linha);
-                    }
+                    lanche.lerArquivo("clientes.txt");
                     break;
+
+
+                case 8:
+                    
+
+                case 9:
+                    pedidoAtual.mostrarPedido();
+                    break;
+
                 case 0:
-                    System.out.println("Encerrando...");
+                    System.out.println("\n✅ Encerrando sistema... Até logo!");
                     break;
+
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("❌ Opção inválida. Tente novamente!");
             }
         } while (opcao != 0);
-    }
-    public static void salvarListaEmArquivo(String nomeArquivo, List<?> lista) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo,true))) {
-            for (Object obj : lista) {
-                writer.write(obj.toString());
-                writer.newLine();
-            }
-            System.out.println("Dados salvos em: " + nomeArquivo);
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar " + nomeArquivo + ": " + e.getMessage());
-        }
     }
 }
