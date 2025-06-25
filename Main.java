@@ -135,7 +135,7 @@ public class Main {
 
                         boolean achou = false;
                         for (int i = 0; i < lanche.quantidadeCardapio(); i++) {
-                            if (lanche.mostrarCardapio(getNome().equalsIgnoreCase(escolha))) {
+                            if (lanche.mostrarCardapio("cardapio.txt").getNome().equalsIgnoreCase(escolha)) {
                                 pedidoAtual.adicionarProduto(p);
                                 achou = true;
                                 break;
@@ -144,24 +144,9 @@ public class Main {
 
                         if (!achou) System.out.println("❌ Produto não encontrado.");
                     }
-
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter("pedidos.txt", true))) {
-                        bw.write(pedidoAtual.formatarParaArquivo());
-                    } catch (IOException e) {
-                        System.out.println("❌ Erro ao salvar pedido: " + e.getMessage());
-                    }
-
-                    System.out.println("✅ Pedido finalizado e salvo com sucesso!\n");
-                    break;
-
-
+                    
                     case 9:
-                        if (pedidoAtual == null || pedidoAtual.getNome() == null) {
-                            System.out.println("❌ Nenhum pedido foi feito ainda.");
-                        } else {
-                            pedidoAtual.mostrarPedido();
-                        }
-                        break;
+                        pedidoAtual.mostrarPedido();
 
                 case 0:
                     System.out.println("\n✅ Encerrando sistema... Até logo!");

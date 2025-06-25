@@ -112,7 +112,7 @@ public class Lanchonete {
              while ((linha = leitor.readLine()) != null) {
                  cont.add(linha); 
              }
-             return cont.size();
          }
+         return cont.size();
     }
 }
