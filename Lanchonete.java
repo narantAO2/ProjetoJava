@@ -1,8 +1,4 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,10 +71,37 @@ public class Lanchonete {
     public ArrayList<String> getCardapioSalvar() {
         ArrayList<String> cardapioSalvar = new ArrayList<>();
         for (Produto p : cardapio) {
-            String linha = "Produto: " + p.getNome() + " | Preço: R$ " + p.getPreco() + " | Tipo: " + p.getClass().getSimpleName();
+            String linha = p.getNome() + ";" + p.getPreco() + ";" + p.getClass().getSimpleName();
             cardapioSalvar.add(linha);
         }
         return cardapioSalvar;
+    }
+
+    public ArrayList<Produto> getCardapioProdutos() {
+        ArrayList<Produto> cardapioProdutos = new ArrayList<>();
+        try (BufferedReader leitor = new BufferedReader(new FileReader("cardapio.txt"))) {
+            String linha;
+            while ((linha = leitor.readLine()) != null) {
+                String[] partes = linha.split(";");
+                String nome = partes[0].trim();
+                double preco = Double.parseDouble(partes[1]);
+                String classe = partes[2].trim();
+                if(classe.equalsIgnoreCase("Bebida")){
+                    Bebida b = new Bebida(nome,preco);
+                    cardapioProdutos.add(b);
+                }else if(classe.equalsIgnoreCase("Lanche")){
+                    Lanche l = new Lanche(nome,preco);
+                    cardapioProdutos.add(l);
+                }else if(classe.equalsIgnoreCase("Sobremesa")){
+                    Sobremesa s = new Sobremesa(nome,preco);
+                    cardapioProdutos.add(s);
+                }
+
+            }
+        } catch (IOException e) {
+            System.out.println("❌ Erro ao ler o arquivo " + ": " + e.getMessage());
+        }
+        return cardapioProdutos;
     }
     
     public static void lerArquivo(String nomeArquivo) {
@@ -112,7 +135,11 @@ public class Lanchonete {
              while ((linha = leitor.readLine()) != null) {
                  cont.add(linha); 
              }
+         } catch (FileNotFoundException e) {
+             throw new RuntimeException(e);
+         } catch (IOException e) {
+             throw new RuntimeException(e);
          }
-         return cont.size();
+        return cont.size();
     }
 }

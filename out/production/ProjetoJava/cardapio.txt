@@ -1,3 +1,1 @@
-Produto: Xtudo | Preço: R$ 35.0 | Tipo: Lanche
-Produto: Coca | Preço: R$ 5.0 | Tipo: Bebida
-Produto: Cocaina | Preço: R$ 10.0 | Tipo: Sobremesa
+maracuja;33.0;Bebida

@@ -102,7 +102,7 @@ public class Main {
 
                 case 8:
                     if (lanche.getClientes().isEmpty()) {
-                        System.out.println("❌ Nenhum cliente cadastrado.");
+                        System.out.println("❌ Nenhum cliente HOJE.");
                         break;
                     }
 
@@ -121,7 +121,6 @@ public class Main {
                     }
 
                     lanche.getClientes().get(idCliente);
-                    pedidoAtual.adicionarCliente(cliente);
 
                     boolean continuar = true;
                     while (continuar) {
@@ -135,8 +134,8 @@ public class Main {
 
                         boolean achou = false;
                         for (int i = 0; i < lanche.quantidadeCardapio(); i++) {
-                            if (lanche.mostrarCardapio("cardapio.txt").getNome().equalsIgnoreCase(escolha)) {
-                                pedidoAtual.adicionarProduto(p);
+                            if (lanche.getCardapioProdutos().get(i).getNome().equals(escolha)) {
+                                pedidoAtual.adicionarProduto(lanche.getCardapioProdutos().get(i));
                                 achou = true;
                                 break;
                             }
