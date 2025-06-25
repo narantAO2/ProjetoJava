@@ -84,7 +84,7 @@ public class Main {
                 case 4:
                     System.out.println("\n👥 Clientes de hoje:");
                     for (Cliente cli : lanche.getClientes())
-                        System.out.println("- " + cli.getNome() + " | CPF: " + cli.getCpf());
+                        System.out.println("Nome: " + cli.getNome() + " | CPF: " + cli.getCpf());
                     break;
 
                 case 5:
