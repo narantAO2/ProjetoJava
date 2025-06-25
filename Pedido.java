@@ -31,7 +31,7 @@ public class Pedido {
     public void mostrarPedido() {
    
         System.out.println("Pedido de " + cliente.getNome() + ":");
-        for (Produto p : prod) System.out.println("- " + p.nome + " (R$ " + p.preco + ")");
+        for (Produto p : prod) System.out.println("Nome: " + p.nome + " (R$ " + p.preco + ")");
         System.out.println("Total: R$ " + calcularValorTotal() + "\n");
         System.out.println("Status: " + status + "\n");
     }

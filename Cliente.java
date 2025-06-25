@@ -5,12 +5,5 @@ public class Cliente extends Pessoa{
         super(nome, cpf, telefone);
     }
 	
-    public void fazerPedido() {
-        System.out.println(getNome() + " está fazendo um pedido...\n");
-    }
-
-    public void pagarConta() {
-        System.out.println(getNome() + " está pagando a conta.\n");
-    }
-	
 }
+	

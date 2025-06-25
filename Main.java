@@ -146,6 +146,7 @@ public class Main {
                     
                     case 9:
                         pedidoAtual.mostrarPedido();
+                        break;
 
                 case 0:
                     System.out.println("\n✅ Encerrando sistema... Até logo!");
