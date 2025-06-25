@@ -36,5 +36,18 @@ public class Pedido {
         System.out.println("Status: " + status + "\n");
     }
     
+    public String formatarParaArquivo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cliente: ").append(cliente.getNome()).append("\n");
+        sb.append("Produtos:\n");
+        for (Produto p : prod) {
+            sb.append("- ").append(p.getNome()).append(" (R$ ").append(p.getPreco()).append(")\n");
+        }
+        sb.append("Total: R$ ").append(calcularValorTotal()).append("\n");
+        sb.append("Status: ").append(status).append("\n");
+        sb.append("======================================\n");
+        return sb.toString();
+    }
+
     
 }

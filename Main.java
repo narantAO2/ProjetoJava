@@ -101,13 +101,67 @@ public class Main {
 
 
                 case 8:
+                    if (lanche.getClientes().isEmpty()) {
+                        System.out.println("❌ Nenhum cliente cadastrado.");
+                        break;
+                    }
 
+                    System.out.println("\n👥 Clientes disponíveis:");
+                    for (int i = 0; i < lanche.getClientes().size(); i++) {
+                        System.out.println(i + " - " + lanche.getClientes().get(i).getNome());
+                    }
 
+                    System.out.print("Digite o número do cliente que vai fazer o pedido: ");
+                    int idCliente = sc.nextInt();
+                    sc.nextLine();
+
+                    if (idCliente < 0 || idCliente >= lanche.getClientes().size()) {
+                        System.out.println("❌ Cliente inválido.");
+                        break;
+                    }
+
+                    lanche.getClientes().get(idCliente);
+                    pedidoAtual.adicionarCliente(cliente);
+
+                    boolean continuar = true;
+                    while (continuar) {
+                        System.out.println("\n📋 Cardápio:");
+                        lanche.mostrarCardapio("cardapio.txt");
+
+                        System.out.print("\nDigite o nome do produto para adicionar ao pedido (ou 'sair' para finalizar): ");
+                        String escolha = sc.nextLine();
+
+                        if (escolha.equalsIgnoreCase("sair")) break;
+
+                        boolean achou = false;
+                        for (int i = 0; i < lanche.quantidadeCardapio(); i++) {
+                            if (lanche.mostrarCardapio(getNome().equalsIgnoreCase(escolha))) {
+                                pedidoAtual.adicionarProduto(p);
+                                achou = true;
+                                break;
+                            }
+                        }
+
+                        if (!achou) System.out.println("❌ Produto não encontrado.");
+                    }
+
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter("pedidos.txt", true))) {
+                        bw.write(pedidoAtual.formatarParaArquivo());
+                    } catch (IOException e) {
+                        System.out.println("❌ Erro ao salvar pedido: " + e.getMessage());
+                    }
+
+                    System.out.println("✅ Pedido finalizado e salvo com sucesso!\n");
                     break;
 
-                case 9:
-                    pedidoAtual.mostrarPedido();
-                    break;
+
+                    case 9:
+                        if (pedidoAtual == null || pedidoAtual.getNome() == null) {
+                            System.out.println("❌ Nenhum pedido foi feito ainda.");
+                        } else {
+                            pedidoAtual.mostrarPedido();
+                        }
+                        break;
 
                 case 0:
                     System.out.println("\n✅ Encerrando sistema... Até logo!");

@@ -104,4 +104,15 @@ public class Lanchonete {
             System.out.println("❌ Erro ao salvar " + nomeArquivo + ": " + e.getMessage());
         }
     }
+    
+    public int quantidadeCardapio() {
+    	ArrayList cont = new ArrayList<>();
+         try (BufferedReader leitor = new BufferedReader(new FileReader("cardapio.txt"))) {
+             String linha;
+             while ((linha = leitor.readLine()) != null) {
+                 cont.add(linha); 
+             }
+             return cont.size();
+         }
+    }
 }
